@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>No-Dath</title>
+  <link rel="icon" href="/img/logo no-dath.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1><embed src="/img/name png blanco.png" width="170cm"></h1>
+    <nav>
+      <ul>
+        <li><a href="/html/inicio.html">Inicio</a></li>
+        <li><a href="/html/posteo.html">Foro</a></li>
+        <li><a href="/html/acerca.html">Acerca de</a></li>
+        <li><a href="/html/contacto.html">Contacto</a></li>
+        <li><a href="/html/cuenta.php">cuenta</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <div id="post-container"></div>
+      <script>
+      // Obtener publicaciones del almacenamiento local
+      var posts = JSON.parse(localStorage.getItem("posts")) || [];
+      
+      // Mostrar publicaciones en el contenedor
+      var postContainer = document.getElementById("post-container");
+      
+      posts.forEach(function(postData) {
+        var post = document.createElement("div");
+        post.className = "posts";
+      
+        var textElement = document.createElement("p");
+        textElement.textContent = postData.text;
+      
+        post.appendChild(textElement);
+      
+        if (postData.image) {
+          var imageElement = document.createElement("img");
+          imageElement.src = postData.image;
+          post.appendChild(imageElement);
+        }
+      
+        postContainer.appendChild(post);
+      });
+    </script>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 No-Dath. Todos los derechos reservados ©.</p>
+  </footer>
+</body>
+</html>

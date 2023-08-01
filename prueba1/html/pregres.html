@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Formulario de Preguntas y Respuestas</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Manejador de eventos para el envío del formulario
+      $("questionForm").submit(function(event) {
+        // Detener el envío del formulario
+        event.preventDefault();
+        
+        // Obtener los datos del formulario
+        var question = $("question").val();
+        var answer = $("answer").val();
+        
+        // Crear el objeto de datos para enviar al servidor
+        var data = {
+          question: question,
+          answer: answer
+        };
+        
+        // Enviar la solicitud AJAX
+        $.ajax({
+          type: "POST",
+          url: "../php/guardar_pregunta_respuesta.php", // Archivo PHP para procesar y guardar los datos
+          data: data,
+          success: function(response) {
+            // Manejar la respuesta del servidor
+            alert("La pregunta y respuesta se han guardado correctamente");
+            
+            // Limpiar el formulario
+            $("question").val("");
+            $("answer").val("");
+          },
+          error: function() {
+            alert("Ocurrió un error al guardar la pregunta y respuesta");
+          }
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <h1>Formulario de Preguntas y Respuestas</h1>
+  <form id="questionForm">
+    <label for="question">Pregunta:</label>
+    <input type="text" id="question" name="question" required><br>
+    
+    <label for="answer">Respuesta:</label>
+    <textarea id="answer" name="answer" required></textarea><br>
+    
+    <button type="submit">Enviar</button>
+  </form>
+</body>
+</html>
